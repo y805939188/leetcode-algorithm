@@ -1,0 +1,39 @@
+{
+  // 使用 IntelliSense 了解相关属性。 
+  // 悬停以查看现有属性的描述。
+  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "debug-ts",
+      "args": ["${workspaceFolder}/algorithm/${fileBasename}"],
+      "runtimeArgs": ["--nolazy", "-r", "/usr/local/lib/node_modules/ts-node/register"],
+      "sourceMaps": true,
+      "cwd": "${workspaceFolder}",
+      "protocol": "inspector",
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "debug-js",
+      "program": "${workspaceFolder}/algorithm/${fileBasename}",
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "debug-cpp",
+      // workspaceFolder 表示当前打开的根目录
+      // fileBasenameNoExtension 表示当前被激活的文件不带后缀的格式
+      // 比如当前正鼠标聚焦在 a.cpp 那fileBasenameNoExtension就是a
+      "program": "${workspaceFolder}/output/${fileBasenameNoExtension}", // 对应要调试那个文件
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "compile" // 会根据这个label把可执行文件给build出来
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+// @ts-ignore
 class ListNode {
   val: number
   next: ListNode | null
@@ -25,4 +26,3 @@ function isPalindrome(head: ListNode | null): boolean {
   }
   return str1 === str2;
 };
-
