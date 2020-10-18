@@ -1,29 +1,26 @@
 /**
  * @param {TreeNode} root
  * @return {number[]}
- * 
- * 思路:
- *  
+ *
  */
+
 var preorderTraversal = function(root) {
   if (!root) return [];
   const res = [];
   const stack = [];
   let currentNode = root;
-  wrapper: while(currentNode) {
+  while(true) {
     res.push(currentNode.val);
     if(currentNode.left) {
       // 上来先把左节点一路入栈
       stack.push(currentNode);
       currentNode = currentNode.left;
-      continue wrapper;
     } else if (currentNode.right) {
       // 如果发现某个节点没有右节点了
       // 就看它是否有右节点
       // 如果有右节点
       // 就把右节点当成左节点使 但是不用入栈
       currentNode = currentNode.right;
-      continue wrapper;
     } else {
       // 到这里既没有左节点也没有右节点 说明是叶子节点
       // 叶子节点的话 由于上面已经一路把它的父节点入栈了
@@ -33,16 +30,13 @@ var preorderTraversal = function(root) {
       while(!currentNode.right) {
         currentNode = stack.pop();
         if (!currentNode) return res;
-        if (currentNode.right) {
-          currentNode = currentNode.right;
-          continue wrapper;
-        }
       }
+      currentNode = currentNode.right;
     }
   }
 };
 
-[4,9,10,8,5,2,6,7,3,1]
+// [4,9,10,8,5,2,6,7,3,1]
 
 function TreeNode(val, left, right) {
   this.val = (val===undefined ? 0 : val);

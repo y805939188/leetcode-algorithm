@@ -3,12 +3,16 @@
  * @return {number[]}
  * 
  * 思路:
- *  
+ *  后序遍历有个问题就是
+ *  当前处理的如果是某个右节点
+ *  然后往上递归找她的父节点的时候
+ *  它的父节点永远有右节点
+ *  所以得特殊判断一下是否右节点已经处理完毕
  */
 var postorderTraversal = function(root) {
-  const stack = [];
   const res = [];
   if (!root) return res;
+  const stack = [];
   let prevNode = null;
   let currentNode = root;
   while(true) {
@@ -19,16 +23,15 @@ var postorderTraversal = function(root) {
       stack.push(currentNode);
       currentNode = currentNode.right;
     } else {
-      res.push(currentNode.val);
-      prevNode = currentNode;
-      currentNode = stack[stack.length - 1];
-      if (!currentNode) return res;
+      // 这里除了判断没有右节点 还得判断是否当前节点的右节点已经处理完毕
       while (!currentNode.right || (currentNode.right && currentNode.right === prevNode)) {
-        res.push(stack.pop().val);
+        res.push(currentNode.val);
+        // 通过一个额外的变量来保存已经处理完的节点
         prevNode = currentNode;
-        currentNode = stack[stack.length - 1];
+        currentNode = stack.pop();
         if (!currentNode) return res;
       }
+      stack.push(currentNode);
       currentNode = currentNode.right;
     }
   }
