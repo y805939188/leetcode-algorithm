@@ -3,6 +3,16 @@
   "tasks": [
     {
       "type": "shell",
+      "label": "runPy",
+      "command": "python",
+      "args": ["${workspaceFolder}/algorithm/${fileBasename}"],
+      "options": {
+        "cwd": "/usr/bin"
+      },
+      "group": "build"
+    },
+    {
+      "type": "shell",
       "label": "runJs",
       "command": "node",
       "args": ["${workspaceFolder}/algorithm/${fileBasename}"],

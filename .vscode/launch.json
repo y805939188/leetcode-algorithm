@@ -5,6 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "debug-py",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/algorithm/${fileBasename}",
+    },  
+    {
       "type": "node",
       "request": "launch",
       "name": "debug-ts",
