@@ -8,8 +8,14 @@
 /**
  * @param {ListNode[]} lists
  * @return {ListNode}
+ * 
+ * 思路:
+ *  自己构建一个最小堆
+ *  最开始先把每个链表的第一个node干进去
+ *  取出最小
+ *  然后把该最小所在的node的next的node放进最小堆里头
+ *  以此类推
  */
-
 
 class nodeHeap{
   constructor() {
