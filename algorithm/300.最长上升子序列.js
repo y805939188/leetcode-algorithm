@@ -17,23 +17,21 @@ var lengthOfLIS = function(nums) {
 };
 
 // lengthOfLIS([10,9,2,5,3,7,101,18]);
+
+/**
+ * 
+ * 思路2:
+ *  动态规划
+ */
 var lengthOfLIS = function(nums) {
-  const _cache = {};
-  const _lengthOfLIS = (arr, index, prev) => {
-    if (_cache[index]) return _cache[index];
-    if (index >= arr.length) return 0;
-    if (arr[index] > prev) {
-      const res = 1 + _lengthOfLIS(arr, index + 1, arr[index]);
-      _cache[index] = res;
-      return res;
+  if (nums.length === 0) return 0;
+  const arr = new Array(nums.length).fill(1);
+  for (let i = 1; i < arr.length; i++) {
+    for (let j = 0; j < i; j++) {
+      if (nums[i] > nums[j]) {
+        arr[i] = Math.max(arr[i], 1 + arr[j]);
+      }
     }
-    const res = _lengthOfLIS(arr, index + 1, arr[index - 1]);
-    _cache[index] = res;
-    return res;
   }
-  const res = [];
-  for (let i = 0; i < nums.length; i++) {
-    res.push(1 + _lengthOfLIS(nums, i + 1, nums[i]));
-  }
-  return Math.max(...res);
+  return Math.max(...arr);
 };
