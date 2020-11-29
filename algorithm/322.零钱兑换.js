@@ -76,3 +76,17 @@ var coinChange = function(coins, amount) {
  * 思路3:
  *  动态规划
  */
+var coinChange = function(coins, amount) {
+  const res = new Array(amount + 1).fill(Infinity);
+  res[0] = 0;
+  for (let i = 1; i <= amount; i++) {
+    for (let j = 0; j < coins.length; j++) {
+      // 如果当前硬币的面值已经大于当前的 target 钱数了 那就直接 continue
+      if (coins[j] > i) continue;
+      // 之后让 res[i] 在 当前的值, 当前总金额 - 当前硬币面值的值 之间选一个
+      res[i] = Math.min(res[i], 1 + res[i - coins[j]]);
+    }
+  }
+  return res[amount] === Infinity ? -1 : res[amount];
+};
+
