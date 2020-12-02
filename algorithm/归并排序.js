@@ -39,3 +39,40 @@ const mergeSort = (list) => {
   return _mergeSort(list, 0, list.length - 1);
   // return _split(list, 0, list.length - 1);
 }
+
+/**
+ * 还可以自底向上
+ * 依次从左往右每次取两个元素
+ */
+const mergeSort = (list) => {
+
+  const _merge = (arr1, arr2) => {
+    const res = [];
+    let i = j = 0;
+    while(true) {
+      if (arr1[i] > arr2[j]) {
+        res.push(arr2[j++]);
+      } else {
+        res.push(arr1[i++]);
+      }
+      if (i >= arr1.length) {
+        res.push(...arr2.slice(j));
+        break;
+      } else if (j >= arr2.length) {
+        res.push(...arr1.slice(i));
+        break;
+      }
+    }
+    return res;
+  }
+
+  const queue = [...list.map(item => [item])];
+  let left = queue.shift();
+  let right = queue.shift();
+  while (left && right) {
+    queue.push(_merge(left, right));
+    left = queue.shift();
+    right = queue.shift();
+  }
+  return left || right;
+}
