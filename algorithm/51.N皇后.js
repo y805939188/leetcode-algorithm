@@ -4,9 +4,7 @@
  * 
  * 思路:
  *  递归回溯
- *  该思路可以可到正确的结果
- *  但是为啥会有好多重复值呢
- *  暂时还没想明白
+ *  注意下到最后一行的时候直接 push 不然可能会产生重复值
  */
 var solveNQueens = function(n) {
   const res = [];
@@ -49,9 +47,14 @@ var solveNQueens = function(n) {
       const _tmp = tmp.map(item => [...item]);
       // 暂时把皇后下到当前坐标
       _tmp[y][x] = 'Q';
-      for (let i = 0; i < n; i++) {
-        // 从下一行的第 0 位开始挨个儿试
-        _solveNQueens(_tmp, i, y + 1, target, current + 1);
+      if (current + 1 === n) {
+        // 下到最后一行的时候 直接 push 不然可能会导致结果多次被 push
+        res.push(_tmp.map(i => i.join('')));
+      } else {
+        for (let i = 0; i < n; i++) {
+          // 从下一行的第 0 位开始挨个儿试
+          _solveNQueens(_tmp, i, y + 1, target, current + 1);
+        }
       }
     }
   }
@@ -62,3 +65,5 @@ var solveNQueens = function(n) {
   
   console.log(res);
 };
+
+solveNQueens(4);
