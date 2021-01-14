@@ -24,12 +24,14 @@ void quickSort(vector<int>& arr, int left, int right) {
   swap(arr[left], arr[rand() % (right - left + 1) + left]);
   int pivot = arr[left];
   int i = left + 1;
-  int j = right;
+  int j = right; 
   while(true) {
-    while(i <= right && arr[i] <= pivot) i++;
-    while(j >= left + 1 && arr[j] >= pivot) j--;
+    while(i <= right && arr[i] < pivot) i++;
+    while(j >= left + 1 && arr[j] > pivot) j--;
     if (i >= j) break;
     swap(arr[i], arr[j]);
+    i++;
+    j--;
   }
   swap(arr[left], arr[j]);
   quickSort(arr, left, j - 1);

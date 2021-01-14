@@ -83,7 +83,10 @@ var mergeKLists = function(lists) {
   return res[0];
 };
 
-
+function ListNode(val, next) {
+  this.val = (val===undefined ? 0 : val)
+  this.next = (next===undefined ? null : next)
+}
 const node9 = new ListNode(6, null)
 const node8 = new ListNode(2, node9);
 
